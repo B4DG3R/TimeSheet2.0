@@ -1,0 +1,560 @@
+//
+//  DaysViewController.swift
+//  TimeSheetAppV2.0
+//
+//  Created by Matthew Hollyhead on 14/06/2020.
+//  Copyright © 2020 Matthew Hollyhead. All rights reserved.
+//
+
+import Foundation
+import UIKit
+import MessageUI
+//import CoreData
+
+class DaysViewController: UIViewController, MFMailComposeViewControllerDelegate {
+    
+    var emailBrain = EmailBrain()
+    var timeSheetBrain = TimeSheetBrain()
+    
+    let defaults = UserDefaults.standard
+    
+    var dayPressed: String?
+    var date: String?
+    var jobDescription: String?
+    var hours: Double?
+    var yNumber: String?
+    var jobCode: String?
+    var notes: String?
+    var userEmail: String?
+    var timeSheetExport: [String] = []
+    var clearData = false
+    var csvString: String?
+    var tempArray: [JobCellDataModel] = []
+//    var jobList: [JobCellDataModel] = []
+    //var mondayArray: [JobCellDataModel] = []
+//    var storedArray: [String] = []
+    var iteratedArray: [String] = []
+    
+    // Reference to managed object context
+    //let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
+    // Data for the table
+    //var job: [JobDataModel]?
+    
+    
+    var monJobList: [JobCellDataModel] = []
+    var tueJobList: [JobCellDataModel] = []
+    var wedJobList: [JobCellDataModel] = []
+    var thurJobList: [JobCellDataModel] = []
+    var friJobList: [JobCellDataModel] = []
+    var satJobList: [JobCellDataModel] = []
+    var sunJobList: [JobCellDataModel] = []
+    
+    
+    var monHours  = 0.0
+    var tueHours  = 0.0
+    var wedHours  = 0.0
+    var thurhours = 0.0
+    var friHours  = 0.0
+    var satHours  = 0.0
+    var sunHours  = 0.0
+
+    var dataRe = false
+    
+    struct keys {
+        //Keys for saving data
+        static let timeSheetExport  = "timeSheetExport"
+        static let userEmail        = "userEmail"
+        static let monHours         = "mondayHours"
+        static let tuesHours        = "tuesdayHours"
+        static let wedHours         = "wednesdayHours"
+        static let thusHours        = "thursdayHours"
+        static let friHours         = "fridayHours"
+        static let satHours         = "saturdayHours"
+        static let sunHours         = "sundayHours"
+        static let clearTimeSheet   = "clearTimeSheet"
+        static let monJobList       = "monJobList"
+        static let tueJobList       = "tueJobList"
+        static let wedJobList       = "wedJobList"
+        static let thurJobList      = "thurJobList"
+        static let friJobList       = "friJobList"
+        static let satJobList       = "satJobList"
+        static let sunJobList       = "sunJobList"
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        title = "Time Sheet"
+        
+        
+        
+        mondayButton.layer.cornerRadius = mondayButton.frame.size.height/8
+        tuesdayButton.layer.cornerRadius = tuesdayButton.frame.size.height/8
+        wednesdayButton.layer.cornerRadius = wednesdayButton.frame.size.height/8
+        thursdayButton.layer.cornerRadius = thursdayButton.frame.size.height/8
+        fridayButton.layer.cornerRadius = fridayButton.frame.size.height/8
+        saturdayButton.layer.cornerRadius = saturdayButton.frame.size.height/8
+        sundayButton.layer.cornerRadius = sundayButton.frame.size.height/8
+        exportButton.layer.cornerRadius = exportButton.frame.size.height/8
+        addJobButton.layer.cornerRadius = addJobButton.frame.size.height/8
+        
+        //checkForSavedData()
+        
+        //jobList = createArray()
+
+        
+        // gets job data from addEditTaksVC
+        NotificationCenter.default.addObserver(self, selector: #selector(didGetNotificationJobDescription(_:)), name: Notification.Name("jobDescriptionTextField"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didGetNotificationHours(_:)), name: Notification.Name("hoursTextField"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didGetNotificationYNumber(_:)), name: Notification.Name("yNumberTextField"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didGetNotificationJobCode(_:)), name: Notification.Name("jobCodeTextField"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didGetNotificationNotes(_:)), name: Notification.Name("notesTextField"), object: nil)
+
+        //Get User Email
+        NotificationCenter.default.addObserver(self, selector: #selector(didGetNotificationEmail(_:)), name: Notification.Name("emailTextField"), object: nil)
+
+        //  tells func didGetNotificationReloadData there is data to be appended to addJobToListString() and calls this function
+        NotificationCenter.default.addObserver(self, selector: #selector(didGetNotificationReloadData(_:)), name: Notification.Name("ReloadData"), object: nil)
+
+        // tells func didGetNotificationClearData to clear all time sheet data
+        NotificationCenter.default.addObserver(self, selector: #selector(didGetNotificationClearData(_:)), name: Notification.Name("clearTimeSheetData"), object: nil)
+        
+        //loadTableViewOnStartUp()
+    }
+    
+//    func fetchData() {
+//
+//        // Fetch data from core data
+//        do {
+//            self.job = try context.fetch(JobDataModel.fetchRequest())
+//        }
+//        catch {
+//
+//        }
+//
+//    }
+    
+    
+    @IBOutlet var hoursLabel: UILabel!
+    @IBOutlet var mondayButton: UIButton!
+    @IBOutlet var tuesdayButton: UIButton!
+    @IBOutlet var wednesdayButton: UIButton!
+    @IBOutlet var thursdayButton: UIButton!
+    @IBOutlet var fridayButton: UIButton!
+    @IBOutlet var saturdayButton: UIButton!
+    @IBOutlet var sundayButton: UIButton!
+    @IBOutlet var exportButton: UIButton!
+    @IBOutlet var addJobButton: UIButton!
+    
+    @IBAction func mondayButtonPressed(_ sender: UIButton) {
+        //self.fetchData()
+    }
+    @IBAction func tuesdayButtonPressed(_ sender: UIButton) {
+    }
+    @IBAction func wednesdayButtonPressed(_ sender: UIButton) {
+    }
+    @IBAction func thursdayButtonPressed(_ sender: UIButton) {
+    }
+    @IBAction func fridayButtonPressed(_ sender: UIButton) {
+    }
+    @IBAction func saturdayButtonPressed(_ sender: UIButton) {
+    }
+    @IBAction func sundayButtonPressed(_ sender: UIButton) {
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToMondayTableView" {
+            let destinationVC = segue.destination as! JobsTableViewController
+            destinationVC.jobList = monJobList
+            
+        }
+        if segue.identifier == "goToTuesdayTableView" {
+            let destinationVC = segue.destination as! JobsTableViewController
+            destinationVC.jobList = tueJobList
+        }
+        if segue.identifier == "goToWednesdayTableView" {
+            let destinationVC = segue.destination as! JobsTableViewController
+            destinationVC.jobList = wedJobList
+        }
+        if segue.identifier == "goToThursdayTableView" {
+            let destinationVC = segue.destination as! JobsTableViewController
+            destinationVC.jobList = thurJobList
+        }
+        if segue.identifier == "goToFridayTableView" {
+            let destinationVC = segue.destination as! JobsTableViewController
+            destinationVC.jobList = friJobList
+        }
+        if segue.identifier == "goToSaturdayTableView" {
+            let destinationVC = segue.destination as! JobsTableViewController
+            destinationVC.jobList = satJobList
+        }
+        if segue.identifier == "goToSundayTableView" {
+            let destinationVC = segue.destination as! JobsTableViewController
+            destinationVC.jobList = sunJobList
+        }
+        
+    }
+    @IBAction func addJobButtonPressed(_ sender: UIButton) {
+        //Opens addEditTask View Controller Modually
+        let addEditController = storyboard?.instantiateViewController(identifier: "AddEditViewController") as! AddEditViewController
+        present(addEditController, animated: true)
+    }
+
+    @IBAction func exportButtonPressed(_ sender: UIButton) {
+
+        userEmail = emailBrain.getUserEmail()
+
+        csvString = timeSheetExport.joined(separator: ",")
+        print("csv string - \(csvString ?? "No CSV String Data")")
+
+        let data = csvString!.data(using: String.Encoding.utf8, allowLossyConversion: false)
+        if let content = data {
+            print("NSData: \(content)")
+        }
+
+        func sendEmail() {
+            if MFMailComposeViewController.canSendMail() {
+                let mail = MFMailComposeViewController()
+                print("Users Email is \(userEmail!)")
+                mail.mailComposeDelegate = self
+                mail.setToRecipients([userEmail!])
+                mail.setSubject("Time Sheet")
+                mail.setMessageBody("<p>This weeks Time Sheet</p>", isHTML: true)
+
+                //Add CSV File to email
+                mail.addAttachmentData(data!, mimeType: "text/csv", fileName: "timeSheet.csv")
+
+                self.present(mail, animated: true)
+
+            } else {
+                // show failure alert
+                print("Cannot send mail")
+            }
+        }
+
+        func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+
+            controller.dismiss(animated: true, completion: nil)
+        }
+
+        sendEmail()
+    }
+
+    @objc func didGetNotificationJobDescription(_ notification: Notification) {
+        let descriptionText = notification.object as! String
+        jobDescription = descriptionText
+        print("Job Description - \(jobDescription ?? "No Job Description")")
+    }
+
+    @objc func didGetNotificationHours(_ notification: Notification) {
+        let hoursText = notification.object as! String
+        hours = Double(hoursText)
+        print("hours - \(hours ?? 0.0)")
+    }
+
+    @objc func didGetNotificationYNumber(_ notification: Notification) {
+        let yNumberText = notification.object as! String
+        yNumber = yNumberText
+        print("y number - \(yNumber ?? "No Y Number")")
+    }
+
+    @objc func didGetNotificationJobCode(_ notification: Notification) {
+        let jobCodeText = notification.object as! String
+        jobCode = jobCodeText
+        print("job Code - \(jobCode ?? "No Job Code")")
+    }
+
+    @objc func didGetNotificationNotes(_ notification: Notification) {
+        let notesText = notification.object as! String
+        notes = notesText
+        print("notes - \(notes!)")
+    }
+
+    @objc func didGetNotificationEmail(_ notification: Notification) {
+        let email = notification.object as! String
+        emailBrain.setUserEmail(emailAddress: email)
+        print("email - \(email)")
+    }
+
+    @objc func didGetNotificationClearData(_ notification: Notification) {
+        clearData = notification.object as! Bool
+        print(clearData)
+
+        if clearData == true {
+            clearTimeSheetData()
+        }
+
+        clearData = false
+    }
+
+    @objc func didGetNotificationReloadData(_ notification: Notification) {
+        dataRe = notification.object as! Bool
+
+        if dataRe == true {
+            print("View Controller got Reloaded")
+
+            // creates/adds job to job list and reloads the table view
+            createArray()
+//            fridayTableView.reloadData()
+            
+            //addJobToListString()
+            //print(timeSheetBrain.getwhichDayOfTheWeek())
+            //timeSheetBrain.getwhichDayOfTheWeek()
+            
+            setHours()
+            updateHours()
+            saveData()
+        }
+    }
+    
+    func createArray() {
+        
+        print("createArray Function Call")
+        
+        //let addToDaySheet = JobCellDataModel(yNumber: yNumber ?? "No Y Number", jobCode: jobCode  ?? "No Job Code", hours: String(hours ?? 0.0))
+        
+        var addToTimeSheet = [yNumber ?? "No Y Number", jobCode  ?? "No Job Code", String(hours ?? 0.0)]
+        
+        iteratedArray.append(contentsOf: addToTimeSheet)
+    
+        if addToTimeSheet[0] == "" {
+            for items in (0...addToTimeSheet.count - 1) {
+                       addToTimeSheet.removeFirst()
+                   }
+                   //            iteratedArray = []
+                   
+                   // This gets iterated through and then is cleared by end of function call
+                   iteratedArray.append(contentsOf: addToTimeSheet)
+            
+        }
+        
+        
+        
+        if timeSheetBrain.getwhichDayOfTheWeek() == "Monday" {
+            monJobList.append(contentsOf: iteratedArray)
+        } else if timeSheetBrain.getwhichDayOfTheWeek() == "Tuesday" {
+            tueJobList.append(contentsOf: iteratedArray)
+        } else if timeSheetBrain.getwhichDayOfTheWeek() == "Wednesday" {
+            wedJobList.append(contentsOf: iteratedArray)
+        } else if timeSheetBrain.getwhichDayOfTheWeek() == "Thursday" {
+            thurJobList.append(contentsOf: iteratedArray)
+        } else if timeSheetBrain.getwhichDayOfTheWeek() == "Friday" {
+            friJobList.append(contentsOf: iteratedArray)
+        } else if timeSheetBrain.getwhichDayOfTheWeek() == "Saturday" {
+            satJobList.append(contentsOf: iteratedArray)
+        } else if timeSheetBrain.getwhichDayOfTheWeek() == "Sunday" {
+            sunJobList.append(contentsOf: iteratedArray)
+        }
+
+        addJobToListString()
+        saveData()
+        
+        // Create jobData Object
+//        let newJob = JobDataModel(context: self.context)
+//        newJob.yNumber = yNumber
+//        newJob.jobCode = jobCode
+//        newJob.hours = hours!
+//        
+//        // Save the data
+//        do {
+//            try self.context.save()
+//        }
+//        catch {
+//            
+//        }
+    }
+    
+//
+//
+    func addJobToListString() {
+
+        // Array contains variable data to be added to export list
+        // \n in item 3 of array to append onto new line
+        let addToTimeSheet = ["\n\(timeSheetBrain.getwhichDayOfTheWeek())", jobDescription ?? "No Job Description", String(hours ?? 0.0), yNumber ?? "No Y Number", jobCode ?? "No Job Code", notes ?? "No Notes"]
+
+        // Appends contents of addTimeSheet to timeSheetExport
+        timeSheetExport.append(contentsOf: addToTimeSheet)
+
+        // Prints export array to console
+        //print(timeSheetExport)
+    }
+//
+    func saveData() {
+        defaults.set(timeSheetExport, forKey: keys.timeSheetExport)
+        defaults.set(emailBrain.getUserEmail(), forKey: keys.userEmail)
+        //defaults.set(storedArray, forKey: keys.storedArray)
+        defaults.set(sunHours, forKey: keys.sunHours)
+        defaults.set(monHours, forKey: keys.monHours)
+        defaults.set(tueHours, forKey: keys.tuesHours)
+        defaults.set(wedHours, forKey: keys.wedHours)
+        defaults.set(thurhours, forKey: keys.thusHours)
+        defaults.set(friHours, forKey: keys.friHours)
+        defaults.set(satHours, forKey: keys.satHours)
+//        defaults.set(monJobList, forKey: keys.monJobList)
+//        defaults.set(tueJobList, forKey: keys.tueJobList)
+//        defaults.set(wedJobList, forKey: keys.wedJobList)
+//        defaults.set(thurJobList, forKey: keys.thurJobList)
+//        defaults.set(friJobList, forKey: keys.friJobList)
+//        defaults.set(satJobList, forKey: keys.satJobList)
+//        defaults.set(sunJobList, forKey: keys.sunJobList)
+        
+        
+        
+
+    }
+
+//    func checkForSavedData() {
+////        let savedTimeSheetExport = defaults.object(forKey: keys.timeSheetExport) as? [String] ?? [String]()
+////        timeSheetExport = savedTimeSheetExport
+//
+//        let savedUserEmail = defaults.value(forKey: keys.userEmail) as? String ?? "No Email Saved"
+//        emailBrain.setUserEmail(emailAddress: savedUserEmail)
+//
+////        let savedStoredArray = defaults.value(forKey: keys.storedArray) as? [String] ?? [String]()
+////        storedArray = savedStoredArray
+//
+//        let savedMonJobList = defaults.value(forKey: keys.monJobList) as? [JobCellDataModel] ?? [JobCellDataModel]()
+//        monJobList = savedMonJobList
+//
+//        let savedTueJobList = defaults.value(forKey: keys.tueJobList) as? [JobCellDataModel] ?? [JobCellDataModel]()
+//        tueJobList = savedTueJobList
+//
+//        let savedWedJobList = defaults.value(forKey: keys.wedJobList) as? [JobCellDataModel] ?? [JobCellDataModel]()
+//        wedJobList = savedWedJobList
+//
+//        let savedThurJobList = defaults.value(forKey: keys.thurJobList) as? [JobCellDataModel] ?? [JobCellDataModel]()
+//        thurJobList = savedThurJobList
+//
+//        let savedFriJobList = defaults.value(forKey: keys.friJobList) as? [JobCellDataModel] ?? [JobCellDataModel]()
+//        friJobList = savedFriJobList
+//
+//        let savedSatJobList = defaults.value(forKey: keys.satJobList) as? [JobCellDataModel] ?? [JobCellDataModel]()
+//        satJobList = savedSatJobList
+//
+//        let savedSunJobList = defaults.value(forKey: keys.sunJobList) as? [JobCellDataModel] ?? [JobCellDataModel]()
+//        sunJobList = savedSunJobList
+//
+//        let savedMondayHours = defaults.double(forKey: keys.monHours)
+//        monHours = savedMondayHours
+//
+//        let savedTuesdayHours = defaults.double(forKey: keys.tuesHours)
+//        tueHours = savedTuesdayHours
+//
+//        let savedWednesdayHours = defaults.double(forKey: keys.wedHours)
+//        wedHours = savedWednesdayHours
+//
+//        let savedThursdayHours = defaults.double(forKey: keys.thusHours)
+//        thurhours = savedThursdayHours
+//
+//        let savedFridayHours = defaults.double(forKey: keys.friHours)
+//        friHours = savedFridayHours
+//
+//        let savedSaturdayHours = defaults.double(forKey: keys.satHours)
+//        satHours = savedSaturdayHours
+//
+//        let savedSundayHours = defaults.double(forKey: keys.sunHours)
+//        sunHours = savedSundayHours
+//
+//        //timeSheetBrain.getwhichDayOfTheWeek()
+//        updateHours()
+//    }
+
+    func setHours() {
+        
+        let today = Calendar.current.component(.weekday, from: Date())
+        switch today {
+        case 1:
+            return monHours += hours ?? 0.0
+        case 2:
+            return tueHours += hours ?? 0.0
+        case 3:
+            return wedHours += hours ?? 0.0
+        case 4:
+            return thurhours += hours ?? 0.0
+        case 5:
+            return friHours += hours ?? 0.0
+        case 6:
+            return satHours += hours ?? 0.0
+        case 7:
+            return sunHours += hours ?? 0.0
+        default:
+            return sunHours += hours ?? 0.0
+        }
+    }
+    
+    func updateHours() {
+        
+        let today = Calendar.current.component(.weekday, from: Date())
+        switch today {
+        case 1:
+            return hoursLabel.text = String(monHours)
+        case 2:
+            return hoursLabel.text = String(tueHours)
+        case 3:
+            return hoursLabel.text = String(wedHours)
+        case 4:
+            return hoursLabel.text = String(thurhours)
+        case 5:
+            return hoursLabel.text = String(friHours)
+        case 6:
+            return hoursLabel.text = String(satHours)
+        case 7:
+            return hoursLabel.text = String(sunHours)
+        default:
+            return hoursLabel.text = "No Hours"
+        }
+    }
+//
+//
+//
+    func clearTimeSheetData() {
+        /*
+         function clears all time sheet data stored in variables
+         resets hours on days VC Buttons
+         then saves the changes into user defaults
+         */
+        
+//        storedArray = []
+//        iteratedArray = []
+        timeSheetExport = []
+        //print("week has been cleared - \(timeSheetExport)")
+        
+        // Sets all day hours to 0.0
+        hours = nil
+        monHours  = 0.0
+        tueHours  = 0.0
+        wedHours  = 0.0
+        thurhours = 0.0
+        friHours  = 0.0
+        satHours  = 0.0
+        sunHours  = 0.0
+        
+        yNumber = ""
+        jobCode = ""
+        
+        // Clear csvString or the data will stay after its been cleared
+        csvString = ""
+        
+        /*Call whichDayOfTheWeek() & setHoursOnDaysVC() to reset hours on
+         days VC Buttons
+         */
+        
+        //timeSheetBrain.getwhichDayOfTheWeek()
+        setHours()
+        updateHours()
+        
+        // save data after clearing or if closed app then reopen data will be reloaded
+        // from user defaults
+        //saveData()
+        
+        monJobList = []
+        tueJobList = []
+        wedJobList = []
+        thurJobList = []
+        friJobList = []
+        satJobList = []
+        sunJobList = []
+        
+        print("clearTimeSheet Data Run")
+    }
+}

@@ -7,25 +7,47 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		23003466249B285800746397 /* TimeSheetBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23003465249B285800746397 /* TimeSheetBrain.swift */; };
+		23003468249B287100746397 /* TimeSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23003467249B287100746397 /* TimeSheet.swift */; };
+		2300346B249B2A4B00746397 /* EmailBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23003469249B2A4B00746397 /* EmailBrain.swift */; };
+		2300346C249B2A4B00746397 /* UserEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2300346A249B2A4B00746397 /* UserEmail.swift */; };
 		232B7C042495F864000635CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232B7C032495F864000635CF /* AppDelegate.swift */; };
 		232B7C062495F864000635CF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232B7C052495F864000635CF /* SceneDelegate.swift */; };
-		232B7C082495F864000635CF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232B7C072495F864000635CF /* ViewController.swift */; };
 		232B7C0B2495F864000635CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 232B7C092495F864000635CF /* Main.storyboard */; };
 		232B7C0E2495F864000635CF /* TimeSheetAppV2_0.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 232B7C0C2495F864000635CF /* TimeSheetAppV2_0.xcdatamodeld */; };
 		232B7C102495F868000635CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 232B7C0F2495F868000635CF /* Assets.xcassets */; };
 		232B7C132495F868000635CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 232B7C112495F868000635CF /* LaunchScreen.storyboard */; };
+		232B7C4C24963F54000635CF /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232B7C4B24963F54000635CF /* SettingsViewController.swift */; };
+		232B7C4E24963FD8000635CF /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232B7C4D24963FD8000635CF /* PageViewController.swift */; };
+		2336C8FC24996DD300A72AC1 /* AddEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2336C8FB24996DD300A72AC1 /* AddEditViewController.swift */; };
+		236B3B6E24C41A7E0029E2C3 /* JobsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236B3B6D24C41A7E0029E2C3 /* JobsTableViewController.swift */; };
+		2371AA2724C0EC3200AD35B2 /* JobsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2371AA2624C0EC3200AD35B2 /* JobsTableViewCell.swift */; };
+		238F71A72496BFBE0096B0DD /* JobCellDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238F71A62496BFBE0096B0DD /* JobCellDataModel.swift */; };
+		238F71A92496C0B50096B0DD /* DaysViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238F71A82496C0B50096B0DD /* DaysViewController.swift */; };
+		23AF51BA24A31A3400ACA2BA /* AddEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23AF51B924A31A3400ACA2BA /* AddEmailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		23003465249B285800746397 /* TimeSheetBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TimeSheetBrain.swift; path = "/Users/matthewhollyhead/Library/Mobile Documents/com~apple~CloudDocs/Documents/Programming/Swift/Development/TimeSheetAppV2.0/TimeSheetAppV2.0/Model/TimeSheetBrain.swift"; sourceTree = "<absolute>"; };
+		23003467249B287100746397 /* TimeSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TimeSheet.swift; path = "/Users/matthewhollyhead/Library/Mobile Documents/com~apple~CloudDocs/Documents/Programming/Swift/Development/TimeSheetAppV2.0/TimeSheetAppV2.0/Model/TimeSheet.swift"; sourceTree = "<absolute>"; };
+		23003469249B2A4B00746397 /* EmailBrain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailBrain.swift; sourceTree = "<group>"; };
+		2300346A249B2A4B00746397 /* UserEmail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserEmail.swift; sourceTree = "<group>"; };
 		232B7C002495F864000635CF /* TimeSheetAppV2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeSheetAppV2.0.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		232B7C032495F864000635CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		232B7C052495F864000635CF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		232B7C072495F864000635CF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		232B7C0A2495F864000635CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		232B7C0D2495F864000635CF /* TimeSheetAppV2_0.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TimeSheetAppV2_0.xcdatamodel; sourceTree = "<group>"; };
 		232B7C0F2495F868000635CF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		232B7C122495F868000635CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		232B7C142495F868000635CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		232B7C4B24963F54000635CF /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		232B7C4D24963FD8000635CF /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
+		2336C8FB24996DD300A72AC1 /* AddEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditViewController.swift; sourceTree = SOURCE_ROOT; };
+		236B3B6D24C41A7E0029E2C3 /* JobsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobsTableViewController.swift; sourceTree = "<group>"; };
+		2371AA2624C0EC3200AD35B2 /* JobsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobsTableViewCell.swift; sourceTree = "<group>"; };
+		238F71A62496BFBE0096B0DD /* JobCellDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobCellDataModel.swift; sourceTree = "<group>"; };
+		238F71A82496C0B50096B0DD /* DaysViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysViewController.swift; sourceTree = "<group>"; };
+		23AF51B924A31A3400ACA2BA /* AddEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEmailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,14 +82,49 @@
 			children = (
 				232B7C032495F864000635CF /* AppDelegate.swift */,
 				232B7C052495F864000635CF /* SceneDelegate.swift */,
-				232B7C072495F864000635CF /* ViewController.swift */,
-				232B7C092495F864000635CF /* Main.storyboard */,
+				232B7C1A2495F8AE000635CF /* Model */,
+				232B7C1B2495F8B5000635CF /* View */,
+				232B7C1D2495F8C6000635CF /* Controller */,
 				232B7C0F2495F868000635CF /* Assets.xcassets */,
 				232B7C112495F868000635CF /* LaunchScreen.storyboard */,
 				232B7C142495F868000635CF /* Info.plist */,
 				232B7C0C2495F864000635CF /* TimeSheetAppV2_0.xcdatamodeld */,
 			);
 			path = TimeSheetAppV2.0;
+			sourceTree = "<group>";
+		};
+		232B7C1A2495F8AE000635CF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				238F71A62496BFBE0096B0DD /* JobCellDataModel.swift */,
+				23003467249B287100746397 /* TimeSheet.swift */,
+				2300346A249B2A4B00746397 /* UserEmail.swift */,
+				23003465249B285800746397 /* TimeSheetBrain.swift */,
+				23003469249B2A4B00746397 /* EmailBrain.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		232B7C1B2495F8B5000635CF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				232B7C092495F864000635CF /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		232B7C1D2495F8C6000635CF /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				232B7C4D24963FD8000635CF /* PageViewController.swift */,
+				238F71A82496C0B50096B0DD /* DaysViewController.swift */,
+				232B7C4B24963F54000635CF /* SettingsViewController.swift */,
+				23AF51B924A31A3400ACA2BA /* AddEmailViewController.swift */,
+				2336C8FB24996DD300A72AC1 /* AddEditViewController.swift */,
+				2371AA2624C0EC3200AD35B2 /* JobsTableViewCell.swift */,
+				236B3B6D24C41A7E0029E2C3 /* JobsTableViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -97,7 +154,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1150;
-				LastUpgradeCheck = 1150;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "Matthew Hollyhead";
 				TargetAttributes = {
 					232B7BFF2495F864000635CF = {
@@ -141,10 +198,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				232B7C082495F864000635CF /* ViewController.swift in Sources */,
+				2300346C249B2A4B00746397 /* UserEmail.swift in Sources */,
 				232B7C0E2495F864000635CF /* TimeSheetAppV2_0.xcdatamodeld in Sources */,
+				2371AA2724C0EC3200AD35B2 /* JobsTableViewCell.swift in Sources */,
+				23003466249B285800746397 /* TimeSheetBrain.swift in Sources */,
+				2336C8FC24996DD300A72AC1 /* AddEditViewController.swift in Sources */,
 				232B7C042495F864000635CF /* AppDelegate.swift in Sources */,
 				232B7C062495F864000635CF /* SceneDelegate.swift in Sources */,
+				232B7C4E24963FD8000635CF /* PageViewController.swift in Sources */,
+				236B3B6E24C41A7E0029E2C3 /* JobsTableViewController.swift in Sources */,
+				2300346B249B2A4B00746397 /* EmailBrain.swift in Sources */,
+				232B7C4C24963F54000635CF /* SettingsViewController.swift in Sources */,
+				238F71A72496BFBE0096B0DD /* JobCellDataModel.swift in Sources */,
+				23003468249B287100746397 /* TimeSheet.swift in Sources */,
+				238F71A92496C0B50096B0DD /* DaysViewController.swift in Sources */,
+				23AF51BA24A31A3400ACA2BA /* AddEmailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -196,6 +264,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -256,6 +325,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -291,14 +361,16 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JZU4295NP5;
 				INFOPLIST_FILE = TimeSheetAppV2.0/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.matthollyhead.TimeSheetAppV2-0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -309,14 +381,16 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JZU4295NP5;
 				INFOPLIST_FILE = TimeSheetAppV2.0/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.matthollyhead.TimeSheetAppV2-0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
