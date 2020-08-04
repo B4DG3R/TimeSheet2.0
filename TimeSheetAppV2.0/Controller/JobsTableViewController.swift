@@ -12,20 +12,51 @@ import CoreData
 class JobsTableViewController: UIViewController {
     
     var jobList: [JobCellDataModel] = []
+    var updateJobList: [JobCellDataModel] = []
     //let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    var clearData = false
+    var clearTable = true
     
     @IBOutlet weak var jobsListTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        updateJobList.append(contentsOf: jobList)
 
         // Do any additional setup after loading the view.
         
-        jobsListTableView.reloadData()
+        
+        
+//        jobList = []
+//        jobsListTableView.reloadData()
+
+        
         jobsListTableView.delegate = self
         jobsListTableView.dataSource = self
+       
+       
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        
+//        jobList.append(contentsOf: updateJobList)
+//        jobsListTableView.reloadData()
+        print("1")
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        
+//        jobList.removeAll()
+//        jobsListTableView.reloadData()
+        
+        print("job list cleared")
+        print(jobList.count)
+        
+        NotificationCenter.default.post(name: Notification.Name("ClearTable"), object: clearTable)
     }
 }
 
@@ -47,7 +78,7 @@ extension JobsTableViewController: UITableViewDataSource, UITableViewDelegate {
 
         cell.setJobCellData(jobList: jobs)
 
-        print(jobList[0])
+        print("2")
 
         return cell
     }

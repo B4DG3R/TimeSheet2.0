@@ -29,11 +29,12 @@ class DaysViewController: UIViewController, MFMailComposeViewControllerDelegate 
     var timeSheetExport: [String] = []
     var clearData = false
     var csvString: String?
-    var tempArray: [JobCellDataModel] = []
+    var clearTable = false
+   
 //    var jobList: [JobCellDataModel] = []
     //var mondayArray: [JobCellDataModel] = []
 //    var storedArray: [String] = []
-    var iteratedArray: [String] = []
+    var iteratedArray: [JobCellDataModel] = []
     
     // Reference to managed object context
     //let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -120,6 +121,7 @@ class DaysViewController: UIViewController, MFMailComposeViewControllerDelegate 
         // tells func didGetNotificationClearData to clear all time sheet data
         NotificationCenter.default.addObserver(self, selector: #selector(didGetNotificationClearData(_:)), name: Notification.Name("clearTimeSheetData"), object: nil)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(didGetNotificationClearTable(_:)), name: Notification.Name("ClearTable"), object: nil)
         //loadTableViewOnStartUp()
     }
     
@@ -166,7 +168,6 @@ class DaysViewController: UIViewController, MFMailComposeViewControllerDelegate 
         if segue.identifier == "goToMondayTableView" {
             let destinationVC = segue.destination as! JobsTableViewController
             destinationVC.jobList = monJobList
-            
         }
         if segue.identifier == "goToTuesdayTableView" {
             let destinationVC = segue.destination as! JobsTableViewController
@@ -281,7 +282,7 @@ class DaysViewController: UIViewController, MFMailComposeViewControllerDelegate 
         print(clearData)
 
         if clearData == true {
-            clearTimeSheetData()
+            //clearTimeSheetData()
         }
 
         clearData = false
@@ -303,32 +304,46 @@ class DaysViewController: UIViewController, MFMailComposeViewControllerDelegate 
             
             setHours()
             updateHours()
-            saveData()
+            //saveData()
         }
     }
     
-    func createArray() {
-        
-        print("createArray Function Call")
-        
-        //let addToDaySheet = JobCellDataModel(yNumber: yNumber ?? "No Y Number", jobCode: jobCode  ?? "No Job Code", hours: String(hours ?? 0.0))
-        
-        var addToTimeSheet = [yNumber ?? "No Y Number", jobCode  ?? "No Job Code", String(hours ?? 0.0)]
-        
-        iteratedArray.append(contentsOf: addToTimeSheet)
-    
-        if addToTimeSheet[0] == "" {
-            for items in (0...addToTimeSheet.count - 1) {
-                       addToTimeSheet.removeFirst()
-                   }
-                   //            iteratedArray = []
-                   
-                   // This gets iterated through and then is cleared by end of function call
-                   iteratedArray.append(contentsOf: addToTimeSheet)
+    @objc func didGetNotificationClearTable(_ notification: Notification) {
+        clearTable = notification.object as! Bool
+        print(clearTable)
+
+        if clearTable == true {
+            
+            hours = 0.0
+            yNumber = ""
+            jobCode =  ""
             
         }
+
+        clearData = false
+    }
+
+    
+    func createArray() {
         
+        //var tempArray: [JobCellDataModel] = []
         
+        let addToTimeSheet = JobCellDataModel(yNumber: yNumber ?? "No Y Number", jobCode: jobCode  ?? "No Job Code", hours: String(hours ?? 0.0))
+        
+        //var addToTimeSheet = [yNumber ?? "No Y Number", jobCode  ?? "No Job Code", String(hours ?? 0.0)]
+        
+        iteratedArray.append(addToTimeSheet)
+    
+//        if addToTimeSheet[0] == "" {
+//            for items in (0...addToTimeSheet.count - 1) {
+//                       addToTimeSheet.removeFirst()
+//                   }
+//                   //            iteratedArray = []
+//
+//                   // This gets iterated through and then is cleared by end of function call
+//                   iteratedArray.append(contentsOf: addToTimeSheet)
+//
+//        }
         
         if timeSheetBrain.getwhichDayOfTheWeek() == "Monday" {
             monJobList.append(contentsOf: iteratedArray)
@@ -347,7 +362,7 @@ class DaysViewController: UIViewController, MFMailComposeViewControllerDelegate 
         }
 
         addJobToListString()
-        saveData()
+        //saveData()
         
         // Create jobData Object
 //        let newJob = JobDataModel(context: self.context)
@@ -362,6 +377,10 @@ class DaysViewController: UIViewController, MFMailComposeViewControllerDelegate 
 //        catch {
 //            
 //        }
+        
+//        tempArray.append(contentsOf: iteratedArray)
+//
+//        return tempArray
     }
     
 //
@@ -379,29 +398,29 @@ class DaysViewController: UIViewController, MFMailComposeViewControllerDelegate 
         //print(timeSheetExport)
     }
 //
-    func saveData() {
-        defaults.set(timeSheetExport, forKey: keys.timeSheetExport)
-        defaults.set(emailBrain.getUserEmail(), forKey: keys.userEmail)
-        //defaults.set(storedArray, forKey: keys.storedArray)
-        defaults.set(sunHours, forKey: keys.sunHours)
-        defaults.set(monHours, forKey: keys.monHours)
-        defaults.set(tueHours, forKey: keys.tuesHours)
-        defaults.set(wedHours, forKey: keys.wedHours)
-        defaults.set(thurhours, forKey: keys.thusHours)
-        defaults.set(friHours, forKey: keys.friHours)
-        defaults.set(satHours, forKey: keys.satHours)
-//        defaults.set(monJobList, forKey: keys.monJobList)
-//        defaults.set(tueJobList, forKey: keys.tueJobList)
-//        defaults.set(wedJobList, forKey: keys.wedJobList)
-//        defaults.set(thurJobList, forKey: keys.thurJobList)
-//        defaults.set(friJobList, forKey: keys.friJobList)
-//        defaults.set(satJobList, forKey: keys.satJobList)
-//        defaults.set(sunJobList, forKey: keys.sunJobList)
-        
-        
-        
-
-    }
+//    func saveData() {
+//        defaults.set(timeSheetExport, forKey: keys.timeSheetExport)
+//        defaults.set(emailBrain.getUserEmail(), forKey: keys.userEmail)
+//        //defaults.set(storedArray, forKey: keys.storedArray)
+//        defaults.set(sunHours, forKey: keys.sunHours)
+//        defaults.set(monHours, forKey: keys.monHours)
+//        defaults.set(tueHours, forKey: keys.tuesHours)
+//        defaults.set(wedHours, forKey: keys.wedHours)
+//        defaults.set(thurhours, forKey: keys.thusHours)
+//        defaults.set(friHours, forKey: keys.friHours)
+//        defaults.set(satHours, forKey: keys.satHours)
+////        defaults.set(monJobList, forKey: keys.monJobList)
+////        defaults.set(tueJobList, forKey: keys.tueJobList)
+////        defaults.set(wedJobList, forKey: keys.wedJobList)
+////        defaults.set(thurJobList, forKey: keys.thurJobList)
+////        defaults.set(friJobList, forKey: keys.friJobList)
+////        defaults.set(satJobList, forKey: keys.satJobList)
+////        defaults.set(sunJobList, forKey: keys.sunJobList)
+//
+//
+//
+//
+//    }
 
 //    func checkForSavedData() {
 ////        let savedTimeSheetExport = defaults.object(forKey: keys.timeSheetExport) as? [String] ?? [String]()
@@ -507,54 +526,55 @@ class DaysViewController: UIViewController, MFMailComposeViewControllerDelegate 
 //
 //
 //
-    func clearTimeSheetData() {
-        /*
-         function clears all time sheet data stored in variables
-         resets hours on days VC Buttons
-         then saves the changes into user defaults
-         */
-        
-//        storedArray = []
-//        iteratedArray = []
-        timeSheetExport = []
-        //print("week has been cleared - \(timeSheetExport)")
-        
-        // Sets all day hours to 0.0
-        hours = nil
-        monHours  = 0.0
-        tueHours  = 0.0
-        wedHours  = 0.0
-        thurhours = 0.0
-        friHours  = 0.0
-        satHours  = 0.0
-        sunHours  = 0.0
-        
-        yNumber = ""
-        jobCode = ""
-        
-        // Clear csvString or the data will stay after its been cleared
-        csvString = ""
-        
-        /*Call whichDayOfTheWeek() & setHoursOnDaysVC() to reset hours on
-         days VC Buttons
-         */
-        
-        //timeSheetBrain.getwhichDayOfTheWeek()
-        setHours()
-        updateHours()
-        
-        // save data after clearing or if closed app then reopen data will be reloaded
-        // from user defaults
-        //saveData()
-        
-        monJobList = []
-        tueJobList = []
-        wedJobList = []
-        thurJobList = []
-        friJobList = []
-        satJobList = []
-        sunJobList = []
-        
-        print("clearTimeSheet Data Run")
-    }
+//    func clearTimeSheetData() {
+//        /*
+//         function clears all time sheet data stored in variables
+//         resets hours on days VC Buttons
+//         then saves the changes into user defaults
+//         */
+//
+////        storedArray = []
+////        iteratedArray = []
+//        timeSheetExport = []
+//        //print("week has been cleared - \(timeSheetExport)")
+//
+//        // Sets all day hours to 0.0
+//        hours = nil
+//        monHours  = 0.0
+//        tueHours  = 0.0
+//        wedHours  = 0.0
+//        thurhours = 0.0
+//        friHours  = 0.0
+//        satHours  = 0.0
+//        sunHours  = 0.0
+//
+//        yNumber = ""
+//        jobCode = ""
+//
+//        // Clear csvString or the data will stay after its been cleared
+//        csvString = ""
+//
+//        /*Call whichDayOfTheWeek() & setHoursOnDaysVC() to reset hours on
+//         days VC Buttons
+//         */
+//
+//        //timeSheetBrain.getwhichDayOfTheWeek()
+//        setHours()
+//        updateHours()
+//
+//        // save data after clearing or if closed app then reopen data will be reloaded
+//        // from user defaults
+//        //saveData()
+//
+//        monJobList = []
+//        tueJobList = []
+//        wedJobList = []
+//        thurJobList = []
+//        friJobList = []
+//        satJobList = []
+//        sunJobList = []
+//
+//        print("clearTimeSheet Data Run")
+//    }
+
 }
