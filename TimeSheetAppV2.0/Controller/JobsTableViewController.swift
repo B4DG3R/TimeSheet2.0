@@ -28,12 +28,13 @@ class JobsTableViewController: UIViewController {
         
         
 //        jobList = []
-//        jobsListTableView.reloadData()
+        jobsListTableView.reloadData()
 
         
         jobsListTableView.delegate = self
         jobsListTableView.dataSource = self
        
+        print("data\(jobList.self)")
        
         
     }

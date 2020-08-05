@@ -165,6 +165,9 @@ class DaysViewController: UIViewController, MFMailComposeViewControllerDelegate 
     @IBAction func sundayButtonPressed(_ sender: UIButton) {
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        print("this got run")
+        
         if segue.identifier == "goToMondayTableView" {
             let destinationVC = segue.destination as! JobsTableViewController
             destinationVC.jobList = monJobList
@@ -175,6 +178,7 @@ class DaysViewController: UIViewController, MFMailComposeViewControllerDelegate 
         }
         if segue.identifier == "goToWednesdayTableView" {
             let destinationVC = segue.destination as! JobsTableViewController
+            print("this got run")
             destinationVC.jobList = wedJobList
         }
         if segue.identifier == "goToThursdayTableView" {
@@ -314,9 +318,9 @@ class DaysViewController: UIViewController, MFMailComposeViewControllerDelegate 
 
         if clearTable == true {
             
-            hours = 0.0
-            yNumber = ""
-            jobCode =  ""
+//            hours = 0.0
+//            yNumber = ""
+//            jobCode =  ""
             
         }
 
@@ -330,9 +334,8 @@ class DaysViewController: UIViewController, MFMailComposeViewControllerDelegate 
         
         let addToTimeSheet = JobCellDataModel(yNumber: yNumber ?? "No Y Number", jobCode: jobCode  ?? "No Job Code", hours: String(hours ?? 0.0))
         
-        //var addToTimeSheet = [yNumber ?? "No Y Number", jobCode  ?? "No Job Code", String(hours ?? 0.0)]
-        
-        iteratedArray.append(addToTimeSheet)
+        //var addToTSheet = [yNumber ?? "No Y Number", jobCode  ?? "No Job Code", String(hours ?? 0.0)]
+
     
 //        if addToTimeSheet[0] == "" {
 //            for items in (0...addToTimeSheet.count - 1) {
@@ -345,20 +348,22 @@ class DaysViewController: UIViewController, MFMailComposeViewControllerDelegate 
 //
 //        }
         
+        print(timeSheetBrain.getwhichDayOfTheWeek())
+        
         if timeSheetBrain.getwhichDayOfTheWeek() == "Monday" {
-            monJobList.append(contentsOf: iteratedArray)
+            monJobList.append(addToTimeSheet)
         } else if timeSheetBrain.getwhichDayOfTheWeek() == "Tuesday" {
-            tueJobList.append(contentsOf: iteratedArray)
+            tueJobList.append(addToTimeSheet)
         } else if timeSheetBrain.getwhichDayOfTheWeek() == "Wednesday" {
-            wedJobList.append(contentsOf: iteratedArray)
+            wedJobList.append(addToTimeSheet)
         } else if timeSheetBrain.getwhichDayOfTheWeek() == "Thursday" {
-            thurJobList.append(contentsOf: iteratedArray)
+            thurJobList.append(addToTimeSheet)
         } else if timeSheetBrain.getwhichDayOfTheWeek() == "Friday" {
-            friJobList.append(contentsOf: iteratedArray)
+            friJobList.append(addToTimeSheet)
         } else if timeSheetBrain.getwhichDayOfTheWeek() == "Saturday" {
-            satJobList.append(contentsOf: iteratedArray)
+            satJobList.append(addToTimeSheet)
         } else if timeSheetBrain.getwhichDayOfTheWeek() == "Sunday" {
-            sunJobList.append(contentsOf: iteratedArray)
+            sunJobList.append(addToTimeSheet)
         }
 
         addJobToListString()

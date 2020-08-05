@@ -162,7 +162,7 @@
                                 </state>
                                 <connections>
                                     <action selector="wednesdayButtonPressed:" destination="Jlh-7f-eDO" eventType="touchUpInside" id="4ST-zQ-QpY"/>
-                                    <segue destination="pRe-qC-m3o" kind="show" identifier="goToWednedayTableView" id="zuo-kh-kDP"/>
+                                    <segue destination="pRe-qC-m3o" kind="show" identifier="goToWednesdayTableView" id="zuo-kh-kDP"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gUg-iV-8Pi" userLabel="Export">
@@ -576,7 +576,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Ei7-pU-NbN"/>
+        <segue reference="zuo-kh-kDP"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrow.right" catalog="system" width="128" height="98"/>
