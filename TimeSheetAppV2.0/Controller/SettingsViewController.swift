@@ -26,7 +26,7 @@ class SettingsViewController: UIViewController {
     @IBAction func clearWeekButtonPressed(_ sender: UIButton) {
         
         NotificationCenter.default.post(name: Notification.Name("clearTimeSheetData"), object: clearData)
-        NotificationCenter.default.post(name: Notification.Name("ReloadData"), object: dataReload)
+        //NotificationCenter.default.post(name: Notification.Name("ReloadData"), object: dataReload)
         
         dismiss(animated: true, completion: nil)
 
