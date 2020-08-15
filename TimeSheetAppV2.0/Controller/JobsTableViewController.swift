@@ -34,7 +34,7 @@ class JobsTableViewController: UIViewController {
         jobsListTableView.delegate = self
         jobsListTableView.dataSource = self
        
-        print("data\(jobList.self)")
+        print("Table View Data - \(jobList.self)")
        
         
     }
@@ -54,10 +54,10 @@ class JobsTableViewController: UIViewController {
 //        jobList.removeAll()
 //        jobsListTableView.reloadData()
         
-        print("job list cleared")
-        print(jobList.count)
-        
-        NotificationCenter.default.post(name: Notification.Name("ClearTable"), object: clearTable)
+//        print("job list cleared")
+//        print(jobList.count)
+//
+//        NotificationCenter.default.post(name: Notification.Name("ClearTable"), object: clearTable)
     }
 }
 
@@ -66,7 +66,7 @@ class JobsTableViewController: UIViewController {
 extension JobsTableViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("job list number of rows \(jobList.count)")
+//        print("job list number of rows \(jobList.count)")
         return jobList.count
 
         //return 1
@@ -79,7 +79,7 @@ extension JobsTableViewController: UITableViewDataSource, UITableViewDelegate {
 
         cell.setJobCellData(jobList: jobs)
 
-        print("2")
+ //       print("2")
 
         return cell
     }
