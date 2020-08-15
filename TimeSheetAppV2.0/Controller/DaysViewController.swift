@@ -556,6 +556,7 @@ class DaysViewController: UIViewController, MFMailComposeViewControllerDelegate 
         satJobList.removeAll()
         sunJobList.removeAll()
         
+        // append contents to temp array otherwise it wipes saved data
         tempSaveArray.append(contentsOf: satSaveList)
         
         let count = tempSaveArray.count/6
