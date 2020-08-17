@@ -429,7 +429,7 @@ class DaysViewController: UIViewController, MFMailComposeViewControllerDelegate 
     func addJobToListString() {
 
         // Array contains variable data to be added to export list
-        // \n in item 3 of array to append onto new line
+        // \n in item 1 of array starts the job on a new line.
         let addToTimeSheet = ["\n\(timeSheetBrain.getwhichDayOfTheWeek())", jobDescription ?? "No Job Description", String(hours ?? 0.0), yNumber ?? "No Y Number", jobCode ?? "No Job Code", notes ?? "No Notes"]
         
         if timeSheetBrain.getwhichDayOfTheWeek() == "Monday" {
@@ -449,14 +449,14 @@ class DaysViewController: UIViewController, MFMailComposeViewControllerDelegate 
         }
 
         // Appends contents of addTimeSheet to timeSheetExport
-        //timeSheetExport.append(contentsOf: addToTimeSheet)
+        timeSheetExport.append(contentsOf: addToTimeSheet)
 
         // Prints export array to console
         //print(timeSheetExport)
     }
 //
     func saveData() {
-        //defaults.set(timeSheetExport, forKey: keys.timeSheetExport)
+        defaults.set(timeSheetExport, forKey: keys.timeSheetExport)
         defaults.set(emailBrain.getUserEmail(), forKey: keys.userEmail)
         //defaults.set(storedArray, forKey: keys.storedArray)
         defaults.set(monHours, forKey: keys.monHours)
@@ -475,16 +475,11 @@ class DaysViewController: UIViewController, MFMailComposeViewControllerDelegate 
         defaults.set(sunSaveList, forKey: keys.sunSaveList)
         defaults.set(saveDataPresent, forKey: keys.saveDataPresent)
         
-        print("Save List - \(sunSaveList)")
-
-
-
-
     }
 
     func checkForSavedData() {
-//        let savedTimeSheetExport = defaults.object(forKey: keys.timeSheetExport) as? [String] ?? [String]()
-//        timeSheetExport = savedTimeSheetExport
+        let savedTimeSheetExport = defaults.object(forKey: keys.timeSheetExport) as? [String] ?? [String]()
+        timeSheetExport = savedTimeSheetExport
 
         let savedUserEmail = defaults.value(forKey: keys.userEmail) as? String ?? "No Email Saved"
         emailBrain.setUserEmail(emailAddress: savedUserEmail)
@@ -506,18 +501,12 @@ class DaysViewController: UIViewController, MFMailComposeViewControllerDelegate 
 
         let savedFriJobList = defaults.value(forKey: keys.friSaveList) as? [String] ?? ["No Data"]
         friSaveList = savedFriJobList
-        
-        //print("jobs are - \(friSaveList)")
 
         let savedSatJobList = defaults.value(forKey: keys.satSaveList) as? [String] ?? ["No Data"]
         satSaveList = savedSatJobList
-        
-        //print("jobs are - \(satSaveList)")
 
         let savedSunJobList = defaults.value(forKey: keys.sunSaveList) as? [String] ?? ["No Data"]
         sunSaveList = savedSunJobList
-        
-        print("jobs are - \(sunSaveList)")
 
         let savedMondayHours = defaults.double(forKey: keys.monHours)
         monHours = savedMondayHours
@@ -720,8 +709,8 @@ class DaysViewController: UIViewController, MFMailComposeViewControllerDelegate 
 
 //        storedArray = []
 //        iteratedArray = []
-        //timeSheetExport = []
-        //print("week has been cleared - \(timeSheetExport)")
+        timeSheetExport = []
+        print("week has been cleared - \(timeSheetExport)")
 
         // Sets all day hours to 0.0
         hours = 0.0
