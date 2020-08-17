@@ -57,7 +57,7 @@ No tests currently.
 - Clear Data button in settings will clear all time sheet data, ready to start a new week.
 
 ## Issues
-As far as I am aware there are no known issues.
+- Auto layout not functioning correctly, only displays fully on iPhone X and larger screen sizes..
 
 ## Future Features
 - Ability to edit saved Jobs
@@ -65,7 +65,8 @@ As far as I am aware there are no known issues.
 - I would like to add a bar graph of some description to the main UI to show the hours for each day.
 
 ## Contribute
-Any contributions, advice of suggestions welcome.
+- Any contributions, advice or suggestions welcome.
+- Please create a new branch and commit to working not to master.
 
 ## Credits
 Credits: Matt Hollyhead
