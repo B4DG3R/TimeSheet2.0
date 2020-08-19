@@ -103,10 +103,14 @@ class DaysViewController: UIViewController, MFMailComposeViewControllerDelegate 
         mondayButton.layer.cornerRadius = mondayButton.frame.size.height/8
         tuesdayButton.layer.cornerRadius = tuesdayButton.frame.size.height/8
         wednesdayButton.layer.cornerRadius = wednesdayButton.frame.size.height/8
+        
         thursdayButton.layer.cornerRadius = thursdayButton.frame.size.height/8
         fridayButton.layer.cornerRadius = fridayButton.frame.size.height/8
         saturdayButton.layer.cornerRadius = saturdayButton.frame.size.height/8
+        
         sundayButton.layer.cornerRadius = sundayButton.frame.size.height/8
+        // timeSheetButton.layer.cornerRadius = timeSheetButton.frame.size.height/8
+        
         exportButton.layer.cornerRadius = exportButton.frame.size.height/8
         addJobButton.layer.cornerRadius = addJobButton.frame.size.height/8
         
@@ -158,6 +162,8 @@ class DaysViewController: UIViewController, MFMailComposeViewControllerDelegate 
     @IBOutlet var sundayButton: UIButton!
     @IBOutlet var exportButton: UIButton!
     @IBOutlet var addJobButton: UIButton!
+    @IBOutlet var timeSheetButton: UIButton!
+    
     
     @IBAction func mondayButtonPressed(_ sender: UIButton) {
         //self.fetchData()
@@ -173,6 +179,8 @@ class DaysViewController: UIViewController, MFMailComposeViewControllerDelegate 
     @IBAction func saturdayButtonPressed(_ sender: UIButton) {
     }
     @IBAction func sundayButtonPressed(_ sender: UIButton) {
+    }
+    @IBAction func timeSheetButtonPressed(_ sender: UIButton) {
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -206,6 +214,9 @@ class DaysViewController: UIViewController, MFMailComposeViewControllerDelegate 
         if segue.identifier == "goToSundayTableView" {
             let destinationVC = segue.destination as! JobsTableViewController
             destinationVC.jobList = sunJobList
+        }
+        if segue.identifier == "goToTimeSheetViewController" {
+            let destinationVC = segue.destination as! TimeSheetViewController
         }
         
     }
