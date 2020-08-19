@@ -57,7 +57,13 @@ No tests currently.
 - Clear Data button in settings will clear all time sheet data, ready to start a new week.
 
 ## Issues
-- Auto layout not functioning correctly, only displays fully on iPhone X and larger screen sizes..
+- Most auto layout issues resolved.
+- UI looks fine on:
+                  - iPhone X / 11 Pro
+                  - iPhone XR / 11
+                  - iPhone 11 Pro Max
+                  
+- iPhone 8 you loose the bottom of the bottom buttons.
 
 ## Future Features
 - Ability to edit saved Jobs
