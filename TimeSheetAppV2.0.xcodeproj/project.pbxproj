@@ -24,6 +24,9 @@
 		2371AA2724C0EC3200AD35B2 /* JobsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2371AA2624C0EC3200AD35B2 /* JobsTableViewCell.swift */; };
 		238F71A72496BFBE0096B0DD /* JobCellDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238F71A62496BFBE0096B0DD /* JobCellDataModel.swift */; };
 		238F71A92496C0B50096B0DD /* DaysViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238F71A82496C0B50096B0DD /* DaysViewController.swift */; };
+		2394A7DF24EB945A0039C58D /* Timesheet.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2394A7DD24EB94590039C58D /* Timesheet.jpg */; };
+		2394A7E024EB945A0039C58D /* Timesheet.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 2394A7DE24EB945A0039C58D /* Timesheet.pdf */; };
+		2394A7E224EB95DA0039C58D /* TimeSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2394A7E124EB95DA0039C58D /* TimeSheetViewController.swift */; };
 		23AF51BA24A31A3400ACA2BA /* AddEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23AF51B924A31A3400ACA2BA /* AddEmailViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -47,6 +50,9 @@
 		2371AA2624C0EC3200AD35B2 /* JobsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobsTableViewCell.swift; sourceTree = "<group>"; };
 		238F71A62496BFBE0096B0DD /* JobCellDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobCellDataModel.swift; sourceTree = "<group>"; };
 		238F71A82496C0B50096B0DD /* DaysViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysViewController.swift; sourceTree = "<group>"; };
+		2394A7DD24EB94590039C58D /* Timesheet.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Timesheet.jpg; sourceTree = "<group>"; };
+		2394A7DE24EB945A0039C58D /* Timesheet.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Timesheet.pdf; sourceTree = "<group>"; };
+		2394A7E124EB95DA0039C58D /* TimeSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSheetViewController.swift; sourceTree = "<group>"; };
 		23AF51B924A31A3400ACA2BA /* AddEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEmailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -89,6 +95,7 @@
 				232B7C112495F868000635CF /* LaunchScreen.storyboard */,
 				232B7C142495F868000635CF /* Info.plist */,
 				232B7C0C2495F864000635CF /* TimeSheetAppV2_0.xcdatamodeld */,
+				2342081324EB9270009C722B /* TimeSheetPDF */,
 			);
 			path = TimeSheetAppV2.0;
 			sourceTree = "<group>";
@@ -123,8 +130,18 @@
 				2336C8FB24996DD300A72AC1 /* AddEditViewController.swift */,
 				2371AA2624C0EC3200AD35B2 /* JobsTableViewCell.swift */,
 				236B3B6D24C41A7E0029E2C3 /* JobsTableViewController.swift */,
+				2394A7E124EB95DA0039C58D /* TimeSheetViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		2342081324EB9270009C722B /* TimeSheetPDF */ = {
+			isa = PBXGroup;
+			children = (
+				2394A7DD24EB94590039C58D /* Timesheet.jpg */,
+				2394A7DE24EB945A0039C58D /* Timesheet.pdf */,
+			);
+			path = TimeSheetPDF;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -185,7 +202,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2394A7DF24EB945A0039C58D /* Timesheet.jpg in Resources */,
 				232B7C132495F868000635CF /* LaunchScreen.storyboard in Resources */,
+				2394A7E024EB945A0039C58D /* Timesheet.pdf in Resources */,
 				232B7C102495F868000635CF /* Assets.xcassets in Resources */,
 				232B7C0B2495F864000635CF /* Main.storyboard in Resources */,
 			);
@@ -213,6 +232,7 @@
 				23003468249B287100746397 /* TimeSheet.swift in Sources */,
 				238F71A92496C0B50096B0DD /* DaysViewController.swift in Sources */,
 				23AF51BA24A31A3400ACA2BA /* AddEmailViewController.swift in Sources */,
+				2394A7E224EB95DA0039C58D /* TimeSheetViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
