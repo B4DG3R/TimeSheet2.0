@@ -84,6 +84,15 @@ extension JobsTableViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        if let vc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
+//            vc.selectedImage = pictures[indexPath.row]
+//            vc.pictures = pictures
+//            vc.imagePosition = indexPath.row + 1
+//            navigationController?.pushViewController(vc, animated: true)
+//        }
+    }
+    
 //    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
 //
 //        // Create swipe action

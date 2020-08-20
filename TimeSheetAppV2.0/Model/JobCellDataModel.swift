@@ -10,12 +10,14 @@ import Foundation
 
 class JobCellDataModel {
     
+    var jobNumber: String
     var yNumber: String
     var jobCode: String
     var hours: String
     
-    init(yNumber: String, jobCode: String, hours: String) {
+    init(jobNumber: String, yNumber: String, jobCode: String, hours: String) {
         
+        self.jobNumber = jobNumber
         self.yNumber = yNumber
         self.jobCode = jobCode
         self.hours = hours

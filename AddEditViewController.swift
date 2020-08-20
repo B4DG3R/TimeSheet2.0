@@ -13,6 +13,7 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
     var timeSheetBrain = TimeSheetBrain()
     
+    var jobNumber: Int?
     var jobDescription: String?
     var hours: Double?
     var yNumber: Int?
@@ -23,10 +24,11 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
     @IBAction func addTaskButtonClicked(_ sender: UIButton) {
         
-        NotificationCenter.default.post(name: Notification.Name("jobDescriptionTextField"), object: jobDescriptionTextField.text)
-        NotificationCenter.default.post(name: Notification.Name("hoursTextField"), object: hoursTextField.text)
+        NotificationCenter.default.post(name: Notification.Name("jobNumberTextField"), object: jobNumberTextField.text)
         NotificationCenter.default.post(name: Notification.Name("yNumberTextField"), object: yNumberTextField.text)
+        NotificationCenter.default.post(name: Notification.Name("hoursTextField"), object: hoursTextField.text)
         NotificationCenter.default.post(name: Notification.Name("jobCodeTextField"), object: jobCodeTextField.text)
+        NotificationCenter.default.post(name: Notification.Name("jobDescriptionTextField"), object: jobDescriptionTextField.text)
         NotificationCenter.default.post(name: Notification.Name("notesTextField"), object: notesTextField.text)
         
         
@@ -35,6 +37,8 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         self.dismiss(animated: true, completion: nil)
     }
     
+    
+    @IBOutlet weak var jobNumberTextField: UITextField!
     @IBOutlet weak var jobDescriptionTextField: UITextField!
     @IBOutlet weak var hoursTextField: UITextField!
     @IBOutlet weak var yNumberTextField: UITextField!
@@ -98,13 +102,16 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         jobCodeTextField.inputView = jobCodePickerClicked
         
         // Picker Data
-        pickerData = [("WVTA", "Electrical Repair"), ("WVYB", "Chassis Repair"), ("WVTG", "Cutter Head Repair"), ("WVYH", "Engine Repair"), ("WVTN", "Tyre Repair"), ("WVYP", "Transmission Repair"), ("WVTV", "Hydraulic Repair"), ("9N03", "Supervision")]
+        pickerData = [("WVTA", "Electrical Repair"), ("WVYB", "Chassis Repair"), ("WVTG", "Cutter Head Repair"), ("WVYH", "Engine Repair"), ("WVTN", "Tyre Repair"), ("WVYP", "Transmission Repair"), ("WVTV", "Hydraulic Repair"), ("9A01", "Annual Leave"), ("9N03", "Supervision"),  ("9N23", "Workshop Cleraning")]
+        
+        jobNumberTextField.text = String(jobNumber!)
         
         
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         // Dismisses keyboard when you hit return key
+        jobNumberTextField.endEditing(true)
         jobDescriptionTextField.endEditing(true)
         hoursTextField.endEditing(true)
         yNumberTextField.endEditing(true)

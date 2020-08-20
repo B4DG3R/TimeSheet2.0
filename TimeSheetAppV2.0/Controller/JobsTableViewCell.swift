@@ -11,6 +11,7 @@ import UIKit
 class JobsTableViewCell: UITableViewCell {
     
 
+    @IBOutlet weak var jobNumberLabel: UILabel!
     @IBOutlet weak var yNumberLabel: UILabel!
     @IBOutlet weak var jobCodeLabel: UILabel!
     @IBOutlet weak var hoursLabel: UILabel!
@@ -18,6 +19,7 @@ class JobsTableViewCell: UITableViewCell {
     
     func setJobCellData(jobList: JobCellDataModel) {
         
+        jobNumberLabel.text = String(jobList.jobNumber)
         yNumberLabel.text = jobList.yNumber
         jobCodeLabel.text = jobList.jobCode
         hoursLabel.text = String(jobList.hours)

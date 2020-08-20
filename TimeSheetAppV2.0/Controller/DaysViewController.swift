@@ -18,8 +18,10 @@ class DaysViewController: UIViewController, MFMailComposeViewControllerDelegate 
     
     let defaults = UserDefaults.standard
     
+    
     var dayPressed: String?
     var date: String?
+    var jobNumber: Int = 0
     var jobDescription: String?
     var hours: Double?
     var yNumber: String?
@@ -75,6 +77,7 @@ class DaysViewController: UIViewController, MFMailComposeViewControllerDelegate 
         //Keys for saving data
         static let timeSheetExport   = "timeSheetExport"
         static let userEmail         = "userEmail"
+        static let jobNumber         = "jobNumber"
         static let monHours          = "mondayHours"
         static let tuesHours         = "tuesdayHours"
         static let wedHours          = "wednesdayHours"
@@ -119,6 +122,7 @@ class DaysViewController: UIViewController, MFMailComposeViewControllerDelegate 
 
         
         // gets job data from addEditTaksVC
+        NotificationCenter.default.addObserver(self, selector: #selector(didGetNotificationJobNumber(_:)), name: Notification.Name("jobNumberTextField"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(didGetNotificationJobDescription(_:)), name: Notification.Name("jobDescriptionTextField"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(didGetNotificationHours(_:)), name: Notification.Name("hoursTextField"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(didGetNotificationYNumber(_:)), name: Notification.Name("yNumberTextField"), object: nil)
@@ -180,8 +184,6 @@ class DaysViewController: UIViewController, MFMailComposeViewControllerDelegate 
     }
     @IBAction func sundayButtonPressed(_ sender: UIButton) {
     }
-    @IBAction func timeSheetButtonPressed(_ sender: UIButton) {
-    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         //print("this got run")
@@ -215,15 +217,21 @@ class DaysViewController: UIViewController, MFMailComposeViewControllerDelegate 
             let destinationVC = segue.destination as! JobsTableViewController
             destinationVC.jobList = sunJobList
         }
-        if segue.identifier == "goToTimeSheetViewController" {
-            let destinationVC = segue.destination as! TimeSheetViewController
+//        if segue.identifier == "goToTimeSheetViewController" {
+//            let destinationVC = segue.destination as! TimeSheetViewController
+//        }
+        if segue.identifier == "addEditViewController" {
+            let destinationVC = segue.destination as! AddEditViewController
+            destinationVC.jobNumber = jobNumber
         }
         
     }
     @IBAction func addJobButtonPressed(_ sender: UIButton) {
         //Opens addEditTask View Controller Modually
-        let addEditController = storyboard?.instantiateViewController(identifier: "AddEditViewController") as! AddEditViewController
-        present(addEditController, animated: true)
+//        let addEditController = storyboard?.instantiateViewController(identifier: "AddEditViewController") as! AddEditViewController
+//        present(addEditController, animated: true)
+        incrementJobNumber()
+        self.performSegue(withIdentifier: "addEditViewController", sender: self)
     }
 
     @IBAction func exportButtonPressed(_ sender: UIButton) {
@@ -264,6 +272,12 @@ class DaysViewController: UIViewController, MFMailComposeViewControllerDelegate 
         }
 
         sendEmail()
+    }
+    
+    @objc func didGetNotificationJobNumber(_ notification: Notification) {
+        let jobNumberText = notification.object as! String
+        jobNumber = Int(jobNumberText)!
+        print("Job Number - \(jobNumber)")
     }
 
     @objc func didGetNotificationJobDescription(_ notification: Notification) {
@@ -347,6 +361,10 @@ class DaysViewController: UIViewController, MFMailComposeViewControllerDelegate 
 
         clearData = false
     }
+    
+    func incrementJobNumber() {
+        jobNumber += 1
+    }
 
     
     func createArray() {
@@ -355,7 +373,7 @@ class DaysViewController: UIViewController, MFMailComposeViewControllerDelegate 
         
 //        var addToTimeSheet = JobCellDataModel(yNumber: yNumber ?? "No Y Number", jobCode: jobCode  ?? "No Job Code", hours: String(hours ?? 0.0))
         
-        var addToTimeSheet = JobCellDataModel(yNumber: yNumber ?? "", jobCode: jobCode ?? "", hours: String(hours ?? 0.0))
+        let addToTimeSheet = JobCellDataModel(jobNumber: String(jobNumber), yNumber: yNumber ?? "", jobCode: jobCode ?? "", hours: String(hours ?? 0.0))
         
         
         //var addToTSheet = [yNumber ?? "No Y Number", jobCode  ?? "No Job Code", String(hours ?? 0.0)]
@@ -441,7 +459,7 @@ class DaysViewController: UIViewController, MFMailComposeViewControllerDelegate 
 
         // Array contains variable data to be added to export list
         // \n in item 1 of array starts the job on a new line.
-        let addToTimeSheet = ["\n\(timeSheetBrain.getwhichDayOfTheWeek())", jobDescription ?? "No Job Description", String(hours ?? 0.0), yNumber ?? "No Y Number", jobCode ?? "No Job Code", notes ?? "No Notes"]
+        let addToTimeSheet = ["\n\(timeSheetBrain.getwhichDayOfTheWeek())", String(jobNumber), jobDescription ?? "No Job Description", String(hours ?? 0.0), yNumber ?? "No Y Number", jobCode ?? "No Job Code", notes ?? "No Notes"]
         
         if timeSheetBrain.getwhichDayOfTheWeek() == "Monday" {
             monSaveList.append(contentsOf: addToTimeSheet)
@@ -470,6 +488,7 @@ class DaysViewController: UIViewController, MFMailComposeViewControllerDelegate 
         defaults.set(timeSheetExport, forKey: keys.timeSheetExport)
         defaults.set(emailBrain.getUserEmail(), forKey: keys.userEmail)
         //defaults.set(storedArray, forKey: keys.storedArray)
+        defaults.set(jobNumber, forKey: keys.jobNumber)
         defaults.set(monHours, forKey: keys.monHours)
         defaults.set(tueHours, forKey: keys.tuesHours)
         defaults.set(wedHours, forKey: keys.wedHours)
@@ -497,6 +516,8 @@ class DaysViewController: UIViewController, MFMailComposeViewControllerDelegate 
 
 //        let savedStoredArray = defaults.value(forKey: keys.storedArray) as? [String] ?? [String]()
 //        storedArray = savedStoredArray
+        let savedJobNumber = defaults.value(forKey: keys.jobNumber) as? Int ?? 0
+        jobNumber = savedJobNumber
 
         let savedMonJobList = defaults.value(forKey: keys.monSaveList) as? [String] ?? ["No Data"]
         monSaveList = savedMonJobList
@@ -584,7 +605,7 @@ class DaysViewController: UIViewController, MFMailComposeViewControllerDelegate 
         
         for _ in (0...totalTimesToLoop) {
             
-            let tempArray = JobCellDataModel(yNumber: tempSaveArray[3], jobCode: tempSaveArray[4], hours: tempSaveArray[2])
+            let tempArray = JobCellDataModel(jobNumber: tempSaveArray[1], yNumber: tempSaveArray[3], jobCode: tempSaveArray[4], hours: tempSaveArray[2])
             
             if tempSaveArray[0] == "\nMonday" {
                 monJobList.append(tempArray)
@@ -735,6 +756,7 @@ class DaysViewController: UIViewController, MFMailComposeViewControllerDelegate 
 
         yNumber = ""
         jobCode = ""
+        jobNumber = 0
 
         // Clear csvString or the data will stay after its been cleared
         csvString = ""
