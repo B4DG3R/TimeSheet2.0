@@ -13,51 +13,24 @@ class JobsTableViewController: UIViewController {
     
     var jobList: [JobCellDataModel] = []
     var updateJobList: [JobCellDataModel] = []
-    //let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var clearTable = true
     
     @IBOutlet weak var jobsListTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        updateJobList.append(contentsOf: jobList)
 
-        // Do any additional setup after loading the view.
-        
-        
-        
-//        jobList = []
         jobsListTableView.reloadData()
-
-        
         jobsListTableView.delegate = self
         jobsListTableView.dataSource = self
-       
-        print("Table View Data - \(jobList.self)")
-       
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        
-//        jobList.append(contentsOf: updateJobList)
-//        jobsListTableView.reloadData()
-        print("1")
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
-        
-//        jobList.removeAll()
-//        jobsListTableView.reloadData()
-        
-//        print("job list cleared")
-//        print(jobList.count)
-//
-//        NotificationCenter.default.post(name: Notification.Name("ClearTable"), object: clearTable)
     }
 }
 
@@ -66,10 +39,7 @@ class JobsTableViewController: UIViewController {
 extension JobsTableViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        print("job list number of rows \(jobList.count)")
         return jobList.count
-
-        //return 1
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -79,44 +49,24 @@ extension JobsTableViewController: UITableViewDataSource, UITableViewDelegate {
 
         cell.setJobCellData(jobList: jobs)
 
- //       print("2")
-
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        if let vc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
-//            vc.selectedImage = pictures[indexPath.row]
-//            vc.pictures = pictures
-//            vc.imagePosition = indexPath.row + 1
-//            navigationController?.pushViewController(vc, animated: true)
-//        }
+        let jobs = jobList[indexPath.row]
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "AddEditViewController") as? AddEditViewController {
+            vc.jobNumber = Int(jobs.jobNumber)
+            vc.yNumber = jobs.yNumber
+            vc.jobCode = jobs.jobCode
+            vc.hours = jobs.hours
+
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
 //    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
 //
-//        // Create swipe action
-//        let action = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completionHandler) in
-//
-//            // Which Job removed
-//            let jobToRemove = self.jobList[indexPath.row]
-//
-//            // remove to job
-//            self.context.delete(jobToRemove)
-//
-//            do {
-//                try self.context.save()
-//            }
-//            catch {
-//
-//            }
-//
-//            self.fetchData()
-//
-//
-//        }
-//
-//        return UISwipeActionsConfiguration(actions: [action])
 //    }
+
     
 }

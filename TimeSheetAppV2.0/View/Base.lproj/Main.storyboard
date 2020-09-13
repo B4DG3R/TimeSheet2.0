@@ -210,7 +210,7 @@
                         <outlet property="thursdayButton" destination="sUN-nq-YXy" id="NoP-5a-6OR"/>
                         <outlet property="tuesdayButton" destination="OaP-Kh-Dek" id="8HH-Gp-2j9"/>
                         <outlet property="wednesdayButton" destination="77g-G8-Uj8" id="68u-iY-sNk"/>
-                        <segue destination="nYk-iY-kgk" kind="presentation" identifier="addEditViewController" id="hmi-eL-53j"/>
+                        <segue destination="nYk-iY-kgk" kind="show" identifier="addEditViewController" id="hmi-eL-53j"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1SI-EQ-CPi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -801,6 +801,7 @@
                             <constraint firstItem="jFk-gr-Bls" firstAttribute="leading" secondItem="yCf-Bx-cvr" secondAttribute="leading" constant="20" id="gQC-bs-Gtb"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="noW-fO-g8C"/>
                     <connections>
                         <outlet property="hoursTextField" destination="g7M-lM-edK" id="2xS-lY-wuK"/>
                         <outlet property="jobCodePickerClicked" destination="aDG-ZM-MGI" id="ozp-gZ-kxe"/>
@@ -838,7 +839,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="AJ1-kx-JNz"/>
+        <segue reference="Ei7-pU-NbN"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Timesheet.jpg" width="3508" height="2480"/>

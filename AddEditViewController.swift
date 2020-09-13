@@ -15,14 +15,20 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
     var jobNumber: Int?
     var jobDescription: String?
-    var hours: Double?
-    var yNumber: Int?
+    var hours: String?
+    var yNumber: String?
     var jobCode: String?
     var pickerData: [(jobCode: String, jobDescription: String)] = [(String, String)]()
     var jobCodeData: [String: String] = [:]
     var dataReload = true
     
+    var editJob: [JobCellDataModel] = []
+    
+    
+    
     @IBAction func addTaskButtonClicked(_ sender: UIButton) {
+        
+        let controllers = self.navigationController?.viewControllers
         
         NotificationCenter.default.post(name: Notification.Name("jobNumberTextField"), object: jobNumberTextField.text)
         NotificationCenter.default.post(name: Notification.Name("yNumberTextField"), object: yNumberTextField.text)
@@ -34,7 +40,9 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         
         NotificationCenter.default.post(name: Notification.Name("ReloadData"), object: dataReload)
         
-        self.dismiss(animated: true, completion: nil)
+        // Dismisses back to root view controller
+        self.navigationController?.popToRootViewController(animated: true)
+        
     }
     
     
@@ -102,9 +110,12 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         jobCodeTextField.inputView = jobCodePickerClicked
         
         // Picker Data
-        pickerData = [("WVTA", "Electrical Repair"), ("WVYB", "Chassis Repair"), ("WVTG", "Cutter Head Repair"), ("WVYH", "Engine Repair"), ("WVTN", "Tyre Repair"), ("WVYP", "Transmission Repair"), ("WVTV", "Hydraulic Repair"), ("9A01", "Annual Leave"), ("9N03", "Supervision"),  ("9N23", "Workshop Cleraning")]
+        pickerData = [("WVTA", "Electrical Repair"), ("WVYB", "Chassis Repair"), ("WVTG", "Cutter Head Repair"), ("WVYH", "Engine Repair"), ("WVTN", "Tyre Repair"), ("WVYP", "Transmission Repair"), ("WVTV", "Hydraulic Repair"), ("9A01", "Annual Leave"), ("9A05", "Statatory Holiday"), ("9N10", "Training/Development"), ("9N03", "Supervision"),  ("9N23", "Workshop Cleraning")]
         
         jobNumberTextField.text = String(jobNumber!)
+        yNumberTextField.text = yNumber ?? ""
+        jobCodeTextField.text = jobCode ?? ""
+        hoursTextField.text = hours ?? ""
         
         
     }
