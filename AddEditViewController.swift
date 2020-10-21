@@ -16,27 +16,69 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     var jobNumber: Int?
     var jobDescription: String?
     var hours: String?
+    //var previousHours: Int?
     var yNumber: String?
     var jobCode: String?
     var pickerData: [(jobCode: String, jobDescription: String)] = [(String, String)]()
     var jobCodeData: [String: String] = [:]
     var dataReload = true
     
+    var dayOfJob: String?
+    
     var editJob: [JobCellDataModel] = []
     
-    
-    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view.
+        
+        jobDescriptionTextField.delegate = self
+        hoursTextField.delegate = self
+        yNumberTextField.delegate = self
+        notesTextField.delegate = self
+        
+        // Connect Picker Data
+        jobCodePickerClicked.delegate = self
+        jobCodePickerClicked.dataSource = self
+
+
+        self.jobCodePickerClicked.isHidden = true;
+
+        jobCodeTextField.delegate = self
+        jobCodeTextField.inputView = jobCodePickerClicked
+        
+        // Picker Data
+        pickerData = [("WVTA", "Electrical Repair"), ("WVYB", "Chassis Repair"), ("WVTG", "Cutter Head Repair"), ("WVYH", "Engine Repair"), ("WVTN", "Tyre Repair"), ("WVYP", "Transmission Repair"), ("WVTV", "Hydraulic Repair"), ("9A01", "Annual Leave"), ("9A05", "Statatory Holiday"), ("9N10", "Training/Development"), ("9N03", "Supervision"),  ("9N23", "Workshop Cleraning")]
+        
+        if yNumber == nil {
+            dayOfJob = timeSheetBrain.getwhichDayOfTheWeek()
+        }
+        
+        dayOfJobTextField.text = dayOfJob
+        jobNumberTextField.text = String(jobNumber!)
+        yNumberTextField.text = yNumber ?? ""
+        jobCodeTextField.text = jobCode ?? ""
+        jobDescriptionTextField.text = jobDescription ?? ""
+        hoursTextField.text = hours ?? ""
+        
+        
+        
+        
+        
+        //print(dayOfJob)
+    }
+
     @IBAction func addTaskButtonClicked(_ sender: UIButton) {
         
-        let controllers = self.navigationController?.viewControllers
         
+        NotificationCenter.default.post(name: Notification.Name("dayOfJob"), object: dayOfJobTextField.text)
         NotificationCenter.default.post(name: Notification.Name("jobNumberTextField"), object: jobNumberTextField.text)
         NotificationCenter.default.post(name: Notification.Name("yNumberTextField"), object: yNumberTextField.text)
         NotificationCenter.default.post(name: Notification.Name("hoursTextField"), object: hoursTextField.text)
         NotificationCenter.default.post(name: Notification.Name("jobCodeTextField"), object: jobCodeTextField.text)
         NotificationCenter.default.post(name: Notification.Name("jobDescriptionTextField"), object: jobDescriptionTextField.text)
         NotificationCenter.default.post(name: Notification.Name("notesTextField"), object: notesTextField.text)
-        
+        NotificationCenter.default.post(name: Notification.Name("previousHours"), object: hours ?? "0.0")
+        print("Previous hours in this vc \(hours ?? "No Hours")")
         
         NotificationCenter.default.post(name: Notification.Name("ReloadData"), object: dataReload)
         
@@ -46,6 +88,7 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     }
     
     
+    @IBOutlet weak var dayOfJobTextField: UITextField!
     @IBOutlet weak var jobNumberTextField: UITextField!
     @IBOutlet weak var jobDescriptionTextField: UITextField!
     @IBOutlet weak var hoursTextField: UITextField!
@@ -90,35 +133,6 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     }
     
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        
-        jobDescriptionTextField.delegate = self
-        hoursTextField.delegate = self
-        yNumberTextField.delegate = self
-        notesTextField.delegate = self
-        
-        // Connect Picker Data
-        jobCodePickerClicked.delegate = self
-        jobCodePickerClicked.dataSource = self
-
-
-        self.jobCodePickerClicked.isHidden = true;
-
-        jobCodeTextField.delegate = self
-        jobCodeTextField.inputView = jobCodePickerClicked
-        
-        // Picker Data
-        pickerData = [("WVTA", "Electrical Repair"), ("WVYB", "Chassis Repair"), ("WVTG", "Cutter Head Repair"), ("WVYH", "Engine Repair"), ("WVTN", "Tyre Repair"), ("WVYP", "Transmission Repair"), ("WVTV", "Hydraulic Repair"), ("9A01", "Annual Leave"), ("9A05", "Statatory Holiday"), ("9N10", "Training/Development"), ("9N03", "Supervision"),  ("9N23", "Workshop Cleraning")]
-        
-        jobNumberTextField.text = String(jobNumber!)
-        yNumberTextField.text = yNumber ?? ""
-        jobCodeTextField.text = jobCode ?? ""
-        hoursTextField.text = hours ?? ""
-        
-        
-    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         // Dismisses keyboard when you hit return key
@@ -145,5 +159,14 @@ class AddEditViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         
         return showPicker
     }
-
+    
+//    func didHaveHours(hours: Int) {
+//        // If hours != 0 then we send the old hours back to deduct from the
+//        // current hours variable
+//        if hours != 0 {
+//            previousHours = hours
+//        } else {
+//            previousHours = 0
+//        }
+//    }
 }

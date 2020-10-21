@@ -55,9 +55,11 @@ extension JobsTableViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let jobs = jobList[indexPath.row]
         if let vc = storyboard?.instantiateViewController(withIdentifier: "AddEditViewController") as? AddEditViewController {
+            vc.dayOfJob = jobs.day
             vc.jobNumber = Int(jobs.jobNumber)
             vc.yNumber = jobs.yNumber
             vc.jobCode = jobs.jobCode
+            vc.jobDescription = jobs.jobDescription
             vc.hours = jobs.hours
 
             navigationController?.pushViewController(vc, animated: true)

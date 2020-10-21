@@ -743,20 +743,25 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="27" translatesAutoresizingMaskIntoConstraints="NO" id="jFk-gr-Bls">
-                                <rect key="frame" x="20" y="103" width="335" height="339"/>
+                                <rect key="frame" x="20" y="76" width="335" height="400"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Job Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dua-we-4a3" userLabel="Job Number Text Field">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Day of the week" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4X4-Sc-05o">
                                         <rect key="frame" x="0.0" y="0.0" width="335" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                        <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Y Number..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="R8q-pN-NVi">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Job Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dua-we-4a3" userLabel="Job Number Text Field">
                                         <rect key="frame" x="0.0" y="61" width="335" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Job Code..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HVq-UM-AqW">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Y Number..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="R8q-pN-NVi">
                                         <rect key="frame" x="0.0" y="122" width="335" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Job Code..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HVq-UM-AqW">
+                                        <rect key="frame" x="0.0" y="183" width="335" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
@@ -764,12 +769,12 @@
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Job Description..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FHe-Lc-gdo">
-                                        <rect key="frame" x="0.0" y="183" width="335" height="34"/>
+                                        <rect key="frame" x="0.0" y="244" width="335" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Hours..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="g7M-lM-edK">
-                                        <rect key="frame" x="0.0" y="244" width="335" height="34"/>
+                                        <rect key="frame" x="0.0" y="305" width="335" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                         <connections>
@@ -777,14 +782,14 @@
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="No Notes" borderStyle="roundedRect" placeholder="Enter Any Notes..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Paf-Nw-ead">
-                                        <rect key="frame" x="0.0" y="305" width="335" height="34"/>
+                                        <rect key="frame" x="0.0" y="366" width="335" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                     </textField>
                                 </subviews>
                             </stackView>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aDG-ZM-MGI">
-                                <rect key="frame" x="27.666666666666657" y="446" width="320" height="216"/>
+                                <rect key="frame" x="27.666666666666657" y="476" width="320" height="216"/>
                             </pickerView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="yCf-Bx-cvr"/>
@@ -792,17 +797,19 @@
                         <constraints>
                             <constraint firstItem="9A1-ZE-0Md" firstAttribute="leading" secondItem="yCf-Bx-cvr" secondAttribute="leading" constant="16" id="4cn-Of-124"/>
                             <constraint firstItem="njz-rU-8Bk" firstAttribute="top" secondItem="yCf-Bx-cvr" secondAttribute="top" constant="20" id="5Rh-ZI-Snr"/>
+                            <constraint firstItem="aDG-ZM-MGI" firstAttribute="top" secondItem="jFk-gr-Bls" secondAttribute="bottom" id="8Jg-eo-ZBm"/>
                             <constraint firstItem="9A1-ZE-0Md" firstAttribute="top" secondItem="yCf-Bx-cvr" secondAttribute="top" constant="20" id="Aqg-uE-b2A"/>
                             <constraint firstItem="yCf-Bx-cvr" firstAttribute="trailing" secondItem="jFk-gr-Bls" secondAttribute="trailing" constant="20" id="LXg-yg-ubJ"/>
                             <constraint firstItem="aDG-ZM-MGI" firstAttribute="centerX" secondItem="bhc-qy-Jw0" secondAttribute="centerX" id="Stg-pI-e1Q"/>
-                            <constraint firstItem="yCf-Bx-cvr" firstAttribute="bottom" secondItem="aDG-ZM-MGI" secondAttribute="bottom" constant="62" id="TPx-6T-NF7"/>
-                            <constraint firstItem="jFk-gr-Bls" firstAttribute="top" secondItem="9A1-ZE-0Md" secondAttribute="bottom" constant="47" id="To5-JO-PwH"/>
+                            <constraint firstItem="yCf-Bx-cvr" firstAttribute="bottom" secondItem="aDG-ZM-MGI" secondAttribute="bottom" priority="1" constant="20" id="TPx-6T-NF7"/>
+                            <constraint firstItem="jFk-gr-Bls" firstAttribute="top" secondItem="9A1-ZE-0Md" secondAttribute="bottom" constant="20" id="To5-JO-PwH"/>
                             <constraint firstItem="yCf-Bx-cvr" firstAttribute="trailing" secondItem="njz-rU-8Bk" secondAttribute="trailing" constant="20" id="aMb-rh-VSm"/>
                             <constraint firstItem="jFk-gr-Bls" firstAttribute="leading" secondItem="yCf-Bx-cvr" secondAttribute="leading" constant="20" id="gQC-bs-Gtb"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="noW-fO-g8C"/>
                     <connections>
+                        <outlet property="dayOfJobTextField" destination="4X4-Sc-05o" id="bO6-ic-hjl"/>
                         <outlet property="hoursTextField" destination="g7M-lM-edK" id="2xS-lY-wuK"/>
                         <outlet property="jobCodePickerClicked" destination="aDG-ZM-MGI" id="ozp-gZ-kxe"/>
                         <outlet property="jobCodeTextField" destination="HVq-UM-AqW" id="GDE-aI-dU5"/>
