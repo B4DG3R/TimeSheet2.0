@@ -309,10 +309,9 @@ class DaysViewController: UIViewController, MFMailComposeViewControllerDelegate 
         }
     }
     
+    
+    
     func createArray() {
-        
-        //var tempArray: [JobCellDataModel] = []
-        var index = -1
                 
         let addToTimeSheet = JobCellDataModel(jobNumber: jobNumber, day: dayOfJob ?? "",  yNumber: yNumber ?? "", jobDescription: jobDescription ?? "", jobCode: jobCode ?? "", hours: String(hours ?? 0.0), notes: notes ?? "")
         
@@ -326,88 +325,36 @@ class DaysViewController: UIViewController, MFMailComposeViewControllerDelegate 
             // If you edit a job
             if jobNumber <= lastJobNumber {
                 
-                // Iterates through the job list until it find the matching job
-                // removes the job at that index
-                // inserts the new edited job into the list in its place
+                // Calls timeSheetBrain.amendJobList function to amend the joblist with
+                // edited job
                 
                 if dayOfJob == "Monday" {
                     
-                    for job in monJobList {
-                        index += 1
-                        if job.jobNumber == jobNumber {
-                            monJobList.remove(at: index)
-                        }
-                    }
-                    monJobList.insert(addToTimeSheet, at: index)
-                    index = -1
+                    // Old edit job function, still testing dont delete yet
                     
+//                    for job in monJobList {
+//                        index += 1
+//                        if job.jobNumber == jobNumber {
+//                            monJobList.remove(at: index)
+//                        }
+//                    }
+//                    monJobList.insert(addToTimeSheet, at: index)
+//                    index = -1
+                    
+                    monJobList = timeSheetBrain.amendJobList(jobList: monJobList, jobToAdd: addToTimeSheet, jobNumber: jobNumber)
                 } else if dayOfJob == "Tuesday" {
-                    
-                    for job in tueJobList {
-                        index += 1
-                        if job.jobNumber == jobNumber {
-                            tueJobList.remove(at: index)
-                        }
-                    }
-                    tueJobList.insert(addToTimeSheet, at: index)
-                    index = -1
-                    
+                    tueJobList = timeSheetBrain.amendJobList(jobList: tueJobList, jobToAdd: addToTimeSheet, jobNumber: jobNumber)
                 } else if dayOfJob == "Wednesday" {
-                    
-                    for job in wedJobList {
-                        index += 1
-                        if job.jobNumber == jobNumber {
-                            wedJobList.remove(at: index)
-                        }
-                    }
-                    wedJobList.insert(addToTimeSheet, at: index)
-                    index = -1
-                    
+                    wedJobList = timeSheetBrain.amendJobList(jobList: wedJobList, jobToAdd: addToTimeSheet, jobNumber: jobNumber)
                 } else if dayOfJob == "Thursday" {
-                    
-                    for job in thurJobList {
-                        index += 1
-                        if job.jobNumber == jobNumber {
-                            thurJobList.remove(at: index)
-                        }
-                    }
-                    thurJobList.insert(addToTimeSheet, at: index)
-                    index = -1
-                    
+                    thurJobList = timeSheetBrain.amendJobList(jobList: thurJobList, jobToAdd: addToTimeSheet, jobNumber: jobNumber)
                 } else if dayOfJob == "Friday" {
-                    
-                    for job in friJobList {
-                        index += 1
-                        if job.jobNumber == jobNumber {
-                            friJobList.remove(at: index)
-                        }
-                    }
-                    friJobList.insert(addToTimeSheet, at: index)
-                    index = -1
-                    
+                    friJobList = timeSheetBrain.amendJobList(jobList: friJobList, jobToAdd: addToTimeSheet, jobNumber: jobNumber)
                 } else if dayOfJob == "Saturday" {
-                    
-                    for job in satJobList {
-                        index += 1
-                        if job.jobNumber == jobNumber {
-                            satJobList.remove(at: index)
-                        }
-                    }
-                    satJobList.insert(addToTimeSheet, at: index)
-                    index = -1
-                    
+                    satJobList = timeSheetBrain.amendJobList(jobList: satJobList, jobToAdd: addToTimeSheet, jobNumber: jobNumber)
                 } else if dayOfJob == "Sunday" {
-                    
-                    for job in sunJobList {
-                        index += 1
-                        if job.jobNumber == jobNumber {
-                            sunJobList.remove(at: index)
-                        }
-                    }
-                    sunJobList.insert(addToTimeSheet, at: index)
-                    index = -1
+                    sunJobList = timeSheetBrain.amendJobList(jobList: sunJobList, jobToAdd: addToTimeSheet, jobNumber: jobNumber)
                 }
-                
             } else {
                 
                 // If you add a new job

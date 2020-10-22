@@ -70,7 +70,26 @@ struct TimeSheetBrain {
         let newJobNumber = jobNumber + 1
         return newJobNumber
     }
-
+    
+    // edits current job list if you edit an already added job.
+    // Iterates through the current job list until it matches the job number
+    // you wish to edit, removes that job and replaces job with the new amended job.
+    func amendJobList(jobList: [JobCellDataModel], jobToAdd: JobCellDataModel, jobNumber: Int) -> [JobCellDataModel] {
+        
+        var index = -1
+        var newJobList = jobList
+        
+        for job in newJobList {
+            index += 1
+            if job.jobNumber == jobNumber {
+                newJobList.remove(at: index)
+            }
+        }
+        newJobList.insert(jobToAdd, at: index)
+        //index = -1
+        
+        return newJobList
+    }
 }
 
 
