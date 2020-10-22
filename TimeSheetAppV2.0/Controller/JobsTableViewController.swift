@@ -13,7 +13,7 @@ class JobsTableViewController: UIViewController {
     
     var jobList: [JobCellDataModel] = []
     var updateJobList: [JobCellDataModel] = []
-    var clearTable = true
+    //var clearTable = true
     
     @IBOutlet weak var jobsListTableView: UITableView!
     
